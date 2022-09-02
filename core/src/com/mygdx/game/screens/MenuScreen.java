@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,14 +22,25 @@ public class MenuScreen implements Screen
     private final Texture img;
     private final Rectangle startRect;
     private final ShapeRenderer shapeRenderer;
+    private final Music music;
+    private final Sound sound;
+    private final Sound sound2;
 
     public MenuScreen(Main game)
     {
         this.game = game;
         batch = new SpriteBatch();
-        img = new Texture("badlogic.jpg");
+        img = new Texture("win.png");
         startRect = new Rectangle(0, 0, img.getWidth(), img.getHeight());
         shapeRenderer = new ShapeRenderer();
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("venera.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
+
+        sound = Gdx.audio.newSound(Gdx.files.internal("orujie.mp3"));
+        sound2 = Gdx.audio.newSound(Gdx.files.internal("0085.mp3"));
     }
 
     @Override
@@ -56,10 +69,21 @@ public class MenuScreen implements Screen
             int y = Gdx.graphics.getHeight() - Gdx.input.getY();
             if (startRect.contains(x, y))
             {
+                sound2.play();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 dispose();
                 game.setScreen(new GameScreen(game));
             }
+            else
+            {
+                sound.play();
+            }
         }
+
     }
 
     @Override
@@ -92,5 +116,8 @@ public class MenuScreen implements Screen
         this.batch.dispose();
         this.img.dispose();
         this.shapeRenderer.dispose();
+        this.music.dispose();
+        this.sound.dispose();
+        this.sound2.dispose();
     }
 }
