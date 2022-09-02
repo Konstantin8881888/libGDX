@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Anim
 {
 //    private Texture img;
-    private TextureAtlas atlas;
+    private final TextureAtlas atlas;
 //    private Animation<TextureRegion> anm; Заменена на строчку ниже
-    private Animation<TextureAtlas.AtlasRegion> anm;
+    private final Animation<TextureAtlas.AtlasRegion> anm;
     private float time;
 
 //    public Anim(String name, int col, int row, Animation.PlayMode playMode) Заменена на строчку ниже

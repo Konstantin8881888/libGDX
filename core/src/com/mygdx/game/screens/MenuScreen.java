@@ -15,11 +15,11 @@ import com.mygdx.game.Main;
 public class MenuScreen implements Screen
 {
 
-    private Main game;
-    private SpriteBatch batch;
-    private Texture img;
-    private Rectangle startRect;
-    private ShapeRenderer shapeRenderer;
+    private final Main game;
+    private final SpriteBatch batch;
+    private final Texture img;
+    private final Rectangle startRect;
+    private final ShapeRenderer shapeRenderer;
 
     public MenuScreen(Main game)
     {
