@@ -19,7 +19,8 @@ public class MyGdxGame extends ApplicationAdapter
 	public void create ()
 	{
 		batch = new SpriteBatch();
-		animation = new Anim("animation.png", 7, 4, Animation.PlayMode.LOOP);
+//		animation = new Anim("animation.png", 7, 4, Animation.PlayMode.LOOP); Заменена на строчку ниже
+		animation = new Anim(Animation.PlayMode.LOOP);
 
 	}
 
