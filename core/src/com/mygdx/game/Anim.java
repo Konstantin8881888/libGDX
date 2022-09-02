@@ -13,7 +13,8 @@ public class Anim
     private Animation<TextureAtlas.AtlasRegion> anm;
     private float time;
 
-    public Anim(String name, int col, int row, Animation.PlayMode playMode)
+//    public Anim(String name, int col, int row, Animation.PlayMode playMode) Заменена на строчку ниже
+    public Anim(Animation.PlayMode playMode)
     {
 //        img = new Texture(name);
 //        img = new Texture("animation.png");
