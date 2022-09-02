@@ -16,33 +16,43 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Anim;
 import com.mygdx.game.Main;
+import com.mygdx.game.PhysX;
+
+import java.util.Arrays;
 
 public class GameScreen implements Screen
 {
-    private Main game;
-    private SpriteBatch batch;
-//    private Texture img;
+    private final Main game;
+    private final SpriteBatch batch;
+    private Texture img;
     private Rectangle startRect;
-    private Anim animation;
+    private final Anim animation;
     private boolean dir = true;
     private int frameSetX = 0;
-    private OrthographicCamera camera;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private Vector2 mapPosition;
-    private float step = 12;
-    private Rectangle mapSize;
-    private ShapeRenderer shapeRenderer;
+    private final OrthographicCamera camera;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final Vector2 mapPosition;
+    private final float step = 12;
+//    private final Rectangle mapSize;
+    private final ShapeRenderer shapeRenderer;
+    private final int[] bg;
+    private final int[] l1;
+    private PhysX physX;
+    private Body body;
+    private final Rectangle heroRect;
 
     public GameScreen(Main game)
     {
         this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-//        img = new Texture("win.png");
+        img = new Texture("win.png");
 //        startRect = new Rectangle(0, 0, img.getWidth(), img.getHeight());
 
 //        animation = new Anim("animation.png", 7, 4, Animation.PlayMode.LOOP); Заменена на строчку ниже
@@ -53,12 +63,25 @@ public class GameScreen implements Screen
         map = new TmxMapLoader().load("map/map1.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
         mapPosition = new Vector2();
+
+        bg = new int[1];
+        bg[0] = map.getLayers().getIndex("Фон");
+        l1 = new int[1];
+        l1[0] = map.getLayers().getIndex("Рельеф");
+//        l1[1] = map.getLayers().getIndex("Фон");
+        physX = new PhysX();
 //        map.getLayers().get("Объекты").getObjects().getByType(RectangleMapObject.class); Второе(камера) выбрано по типу но можно и по имени get("камера")? Ниже:
-        RectangleMapObject tmp = (RectangleMapObject) map.getLayers().get("Объекты").getObjects().get("камера");
-        camera.position.x = tmp.getRectangle().x;
-        camera.position.y = tmp.getRectangle().y;
-        tmp = (RectangleMapObject) map.getLayers().get("Объекты").getObjects().get("граница");
-        mapSize = tmp.getRectangle();
+        RectangleMapObject tmp = (RectangleMapObject) map.getLayers().get("Сеттинг").getObjects().get("hero");
+        heroRect = tmp.getRectangle();
+        body = physX.addObject(tmp);
+
+        Array<RectangleMapObject> objects = map.getLayers().get("Объекты").getObjects().getByType(RectangleMapObject.class);
+//        mapSize = tmp.getRectangle();
+
+        for (int i = 0; i < objects.size; i++)
+        {
+            physX.addObject(objects.get(i));
+        }
     }
 
     @Override
@@ -70,6 +93,8 @@ public class GameScreen implements Screen
     @Override
     public void render(float delta)
     {
+        camera.position.x = body.getPosition().x;
+        camera.position.y = body.getPosition().y;
         camera.update();
         ScreenUtils.clear(Color.BROWN);
 
@@ -88,13 +113,13 @@ public class GameScreen implements Screen
         {
             dir = true;
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && mapSize.x < (camera.position.x - 1))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
         {
-            camera.position.x -= step;
+            body.applyForceToCenter(new Vector2(-1000000, 0), true);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && (mapSize.x + mapSize.width) > (camera.position.x + 1))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
         {
-            camera.position.x += step;
+            body.applyForceToCenter(new Vector2(1000000, 0), true);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
         {
@@ -145,21 +170,33 @@ public class GameScreen implements Screen
 
         ScreenUtils.clear(Color.BROWN);
 
+        mapRenderer.setView(camera);
+        mapRenderer.render(bg);
+
+        System.out.println(body.getLinearVelocity());
+
         batch.setProjectionMatrix(camera.combined);
+        heroRect.x = body.getPosition().x - heroRect.width/2;
+        heroRect.y = body.getPosition().y - heroRect.height/2;
         batch.begin();
-//        batch.draw(img, 0, 0);
+        batch.draw(animation.getFrame(), heroRect.x, heroRect.y, heroRect.width, heroRect.height);
         batch.draw(animation.getFrame(), frameSetX, 0);
         batch.end();
 
-        mapRenderer.setView(camera);
-        mapRenderer.render();
 
-        shapeRenderer.setProjectionMatrix(camera.combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(mapSize.x, mapSize.y, mapSize.width, mapSize.height);
-        shapeRenderer.end();
+//        shapeRenderer.setProjectionMatrix(camera.combined);
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(Color.RED);
+//        for (int i = 0; i < objects.size; i++)
+//        {
+//            Rectangle mapSize = objects.get(i).getRectangle();
+//            shapeRenderer.rect(mapSize.x, mapSize.y, mapSize.width, mapSize.height);
+//        }
+//        shapeRenderer.end();
 
+        mapRenderer.render(l1);
+        physX.step();
+        physX.debugDraw(camera);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S))
     {
@@ -199,7 +236,7 @@ public class GameScreen implements Screen
     public void dispose()
     {
         this.batch.dispose();
-//        this.img.dispose();
+        this.img.dispose();
         this.animation.dispose();
     }
 }
