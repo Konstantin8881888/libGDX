@@ -14,7 +14,13 @@ public class PhysX
     public PhysX()
     {
         world = new World(new Vector2(0, -9.81f), true);
+        world.setContactListener(new MyContList());
         debugRenderer = new Box2DDebugRenderer();
+    }
+
+    public void destroyBody(Body body)
+    {
+        world.destroyBody(body);
     }
 
     public Body addObject(RectangleMapObject object)
@@ -44,13 +50,23 @@ public class PhysX
         fdef.density = 1;
         fdef.restitution = (float) object.getProperties().get("restitution");
 
+
+
         Body body;
         body = world.createBody(def);
-        body.createFixture(fdef).setUserData("стена");
+        String name = object.getName();
+        body.createFixture(fdef).setUserData(name);
+        if (name != null && name.equals("hero"))
+        {
+            polygonShape.setAsBox(rect.width/12, rect.height/12, new  Vector2(0, -rect.width), 0);
+            body.createFixture(fdef).setUserData("ноги");
+            body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);
+        }
 
         polygonShape.dispose();
         return body;
     }
+
     public void setGravity(Vector2 gravity)
     {
         world.setGravity(gravity);
