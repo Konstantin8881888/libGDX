@@ -14,7 +14,9 @@ public class PhysX
     public PhysX()
     {
         world = new World(new Vector2(0, -9.81f), true);
-        world.setContactListener(new MyContList());
+
+        mc = new MyContList();
+        world.setContactListener(mc);
         debugRenderer = new Box2DDebugRenderer();
     }
 
@@ -40,10 +42,12 @@ public class PhysX
             def.type = BodyDef.BodyType.DynamicBody;
         }
 
-        def.position.set(rect.x + rect.width/2, rect.y + rect.height/2);
+
+        def.position.set((rect.x + rect.width/2)/PPM, (rect.y + rect.height/2)/PPM);
         def.gravityScale = (float) object.getProperties().get("gravityScale");
 
-        polygonShape.setAsBox(rect.width/2, rect.height/2);
+        polygonShape.setAsBox(rect.width/2/PPM, rect.height/2/PPM);
+
 
         fdef.shape = polygonShape;
         fdef.friction = 0;
