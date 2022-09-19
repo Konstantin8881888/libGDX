@@ -28,8 +28,8 @@ import com.mygdx.game.PhysX;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-
 import static com.mygdx.game.PhysX.PPM;
+
 
 public class GameScreen implements Screen
 {
@@ -110,6 +110,7 @@ public class GameScreen implements Screen
     {
         camera.position.x = body.getPosition().x*PPM;
         camera.position.y = body.getPosition().y*PPM;
+
         camera.update();
         ScreenUtils.clear(Color.BROWN);
 
@@ -117,6 +118,7 @@ public class GameScreen implements Screen
 
         float x = Gdx.input.getX() - animation.getFrame().getRegionWidth()/2;
         float y = Gdx.graphics.getHeight()-Gdx.input.getY() - animation.getFrame().getRegionHeight()/2;
+
 
 
 //        if (Gdx.input.isKeyJustPressed(Input.Keys.R))
@@ -143,6 +145,7 @@ public class GameScreen implements Screen
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
         {
             body.applyForceToCenter(new Vector2(0, 20000f), true);
+
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUMPAD_SUBTRACT))
@@ -153,6 +156,7 @@ public class GameScreen implements Screen
         {
             camera.zoom -= 0.1f;
         }
+
 
 //        if (frameSetX - 120 >= Gdx.graphics.getWidth())
 //        {
@@ -166,8 +170,10 @@ public class GameScreen implements Screen
 
 
 
+
         if (dir)
         {
+
             frameSetX += 1;
         }
         else
@@ -185,6 +191,7 @@ public class GameScreen implements Screen
         }
         if (!animation.getFrame().isFlipX() && !dir) {
             animation.getFrame().flip(true, false);
+
         }
 
 
@@ -195,6 +202,7 @@ public class GameScreen implements Screen
 
         System.out.println(body.getLinearVelocity());
 
+
 //        batch.setProjectionMatrix(camera.combined);
         heroRect.x = body.getPosition().x - heroRect.width/2;
         heroRect.y = body.getPosition().y - heroRect.height/2;
@@ -204,6 +212,7 @@ public class GameScreen implements Screen
         batch.begin();
         batch.draw(animation.getFrame(), xx, yy, heroRect.width, heroRect.height);
 //        batch.draw(animation.getFrame(), frameSetX, 0);
+
         batch.end();
 
 

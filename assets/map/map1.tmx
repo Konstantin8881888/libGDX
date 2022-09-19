@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="50" height="38" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="16">
+ <tileset firstgid="1" name="Assets" tilewidth="16" tileheight="16" tilecount="1225" columns="49">
+  <image source="Assets.png" width="784" height="400"/>
+  <tile id="1095">
+   <animation>
+    <frame tileid="899" duration="500"/>
+    <frame tileid="851" duration="500"/>
+    <frame tileid="900" duration="500"/>
+    <frame tileid="850" duration="500"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="Рельеф" width="50" height="38" offsetx="1" offsety="2">
+  <data encoding="base64" compression="zlib">
+   eJzVmclOFFEUhm93FUZg57QHXIAMjmBiXGCc0KWKRqMxcSPTBjEmgsMbKMaNzWQhRE0c30B0J4ITEHFlfAPAhQM4fAfqpqrL7mq6QavqJB916zbn9v/3udV1CpSKVqw2lFoDa2GdEbSa3GMP2vfCPtjv8rE5OEk5xQUjmftQxfyZDHkNcaUaoQmaoSX+P9Sm0GGiw0z2MAkf4TSv38yQn0B3F3RDD/QG5COBhy7T0b+ScT4UQKfK7GMY3a9gBEbhdUA+dA20frcP2VeZfMyiew5+wi/4HaAP2UMFtvZsfVSQWynXEmyETQF81yXs/aQ9CM3QArvU4nyEIWqhG8090Gv70OO+RdYjDFGrnD1UaCaPo1aPfDOZKPpoVQt6hQEYdJ23qej4kNBexmFCOR4kouRDQrzchXvK8SAhPqLWX32ASc/cYvqrsMVcjHtyLHkuavtKopJ+osrTUyzWxzXupdehE24E/OySqR6ffXKfoX0InsOLgH1kqseqmDfDiSm0T8MMfMnSRyvrnoM2n/WziUz12G2/dgWuenKLuG8WQwmsN/9eO1WOjjusOwCDy+TDrx7yFuf5IR/1E3iqFsYiWVIOMTgMR6DedOb17+gc77yMx1h3HCbs9fVreTn68KvHFtgK26D6H4/1eU2OPvzqMcX8NMwE9IyUTfjVo4hiF0NJCP8etDOmhkx0a/zqUWc6hC0K8VGNfo1fPcLsQ0cdNTgYd+phQn5s3mckfejnj2rGO2Lz+y5SPi6iuyPuPH+4I0o+dD3y+PxXRPj60PWowcP2EPvoR2M7+jrgUoqjcBnOQsMy+1hqP/8G7W/hHbyHB+h7CI9SHIXHcAsSy+xjKf289hAjL25D82Uxb/WBXA8HXMi18Qn9L2EYGqEJmnP4vvL24Ln2824PUoex+IIPzi3mrdsg10O7iw77Hv6D956FLuiGnjQ+SlmvzEjdi3t7cG8/79e/+3kwnZpY7DHLSlMPiXKOFfI/ADSMwGgaH8dZ74Th9OJfXbh7cDn39vOpcrwow9lLhpHkQc4tvFn9aeoh+Sc5noJvjL9LfZTjo541jsIx2IDG0pBTZiNay+16/AGQUPQW
+  </data>
+ </layer>
+ <layer id="3" name="Фон" width="50" height="38">
+  <data encoding="base64" compression="zlib">
+   eJzt1m0KwjAMBuBsK4pX2ZEEv8BLuN1hTi/kKfSXh7GDleVHbVn3ETvfBwKlpSwpXQkRQJhnRvTKpLMYbqWI1ko6i+E2qgsAAJjHkt7epdQBAP9rl0hnMI7KUsdezx0c9fnWJTws+Vz1XO3I07cOAPO5pERlKp0FAIBfrO9Vk3fBIqYa3hP2ayF9rdnzSz1xSF9r9ozRE/c5i6O+e6cv9++cdMFtHfeV77FFH/ws+DebsQnjpsf3iP4jLm9r/ADX0ByP
+  </data>
+ </layer>
+ <objectgroup id="4" name="Объекты">
+  <object id="4" x="13" y="593" width="772" height="22">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="5" x="246" y="533" width="53" height="63">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="6" x="553" y="505" width="150" height="14">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="7" x="13" y="353" width="477" height="16">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="8" x="147" y="289" width="64" height="68">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="9" name="vasya" x="478" y="184" width="51" height="53">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="gravityScale" type="float" value="5"/>
+    <property name="restitution" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="10" x="1" y="31" width="12" height="580">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="11" x="786" y="35" width="15" height="580">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="13" name="vasya" x="548.5" y="448.5" width="51" height="53">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="gravityScale" type="float" value="5"/>
+    <property name="restitution" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="14" name="vasya" x="434.5" y="537.5" width="51" height="53">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="gravityScale" type="float" value="5"/>
+    <property name="restitution" type="float" value="2"/>
+   </properties>
+  </object>
+  <object id="15" name="vasya" x="708.5" y="537.5" width="51" height="53">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="gravityScale" type="float" value="5"/>
+    <property name="restitution" type="float" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Сеттинг">
+  <object id="1" name="камера" x="401" y="305">
+   <point/>
+  </object>
+  <object id="12" name="hero" x="438.5" y="279.5" width="41" height="65">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
