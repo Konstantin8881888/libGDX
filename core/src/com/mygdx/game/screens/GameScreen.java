@@ -58,6 +58,7 @@ public class GameScreen implements Screen
 
     public GameScreen(Main game)
     {
+
         this.game = game;
         bodies = new ArrayList<>();
         batch = new SpriteBatch();
@@ -86,6 +87,7 @@ public class GameScreen implements Screen
 //        l1[1] = map.getLayers().getIndex("Фон");
         physX = new PhysX();
 //        map.getLayers().get("Объекты").getObjects().getByType(RectangleMapObject.class); Второе(камера) выбрано по типу но можно и по имени get("камера")? Ниже:
+
         RectangleMapObject tmp = (RectangleMapObject) map.getLayers().get("Сеттинг").getObjects().get("hero");
         heroRect = tmp.getRectangle();
         body = physX.addObject(tmp);

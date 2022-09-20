@@ -10,6 +10,8 @@ public class PhysX
 {
     private final World world;
     private final Box2DDebugRenderer debugRenderer;
+    public static final float PPM = 100;
+    public MyContList mc;
 
     public PhysX()
     {
